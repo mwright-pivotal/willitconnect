@@ -40,7 +40,8 @@
   "publishOptions": {
     "include": [
       "appsettings.json",
-      "web.config"
+      "web.config",
+      "manifest.yml"
     ]
   },
 

@@ -32,34 +32,26 @@ namespace wic4windows_v2.Services
             {
                 _logger.LogWarning(e.Entry + " is not a valid hostname");
             }
+            e.LastChecked = DateTime.Now;
             return e;
         }
 
         public void checkUrl(CheckedEntry e)
         {
-            IPAddress IP;
             
-            WebRequest.CreateHttp(e.Entry);
-            Task<IPAddress[]> ipsTask = System.Net.Dns.GetHostAddressesAsync(getHostname(e));
-            ipsTask.Wait();
-            IPAddress[] IPs = ipsTask.Result;
+            HttpWebRequest req = HttpWebRequest.CreateHttp(e.Entry);
+            Task<WebResponse> res = req.GetResponseAsync();
 
-            if (IPAddress.TryParse("127.0.0.1", out IP))
+            try
             {
-                Socket s = new Socket(AddressFamily.InterNetwork,
-                SocketType.Stream,
-                ProtocolType.Tcp);
-
-                try
-                {
-                    s.Connect(IPs[0], getPort(e,getHostname(e)));
-                }
-                catch (Exception ex)
-                {
-                    e.CanConnect = false;
-                    _logger.LogWarning(ex.ToString());
-                }
+                res.Wait(30000);
+                HttpStatusCode code = ((HttpWebResponse)res.Result).StatusCode;
+                e.HttpStatus = (int)code;
                 e.CanConnect = true;
+            } catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                e.CanConnect = false;
             }
         }
 

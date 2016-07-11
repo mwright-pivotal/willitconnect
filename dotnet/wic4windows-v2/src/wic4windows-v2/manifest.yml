@@ -8,3 +8,4 @@ applications:
   buildpack: binary_buildpack
   command: "cmd /c wic4windows-v2.exe --server.urls=http://0.0.0.0:%PORT%"
   stack: windows2012R2
+  health-check-type: none
