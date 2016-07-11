@@ -1,0 +1,10 @@
+applications:
+- path: .
+  memory: 512MB
+  random-route: false
+  instances: 1
+  name: wicwindows
+  disk_quota: 1024M 
+  buildpack: binary_buildpack
+  command: "cmd /c wic4windows-v2.exe --server.urls=http://0.0.0.0:%PORT%"
+  stack: windows2012R2
