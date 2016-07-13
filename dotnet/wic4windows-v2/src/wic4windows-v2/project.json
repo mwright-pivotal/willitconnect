@@ -41,7 +41,8 @@
     "include": [
       "appsettings.json",
       "web.config",
-      "manifest.yml"
+      "manifest-win.yml",
+      "project.json"
     ]
   },
 
@@ -58,6 +59,8 @@
   "runtimes": {
     "win8-x64": {},
     "win7-x64": {},
-    "ubuntu.14.04-x64": {}
+    "ubuntu.14.04-x64": {},
+    "osx.10.10-x64": {},
+    "osx.10.11-x64": {}
   }
 }

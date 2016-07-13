@@ -6,6 +6,6 @@ applications:
   name: wicwindows
   disk_quota: 1024M 
   buildpack: binary_buildpack
-  command: "cmd /c wic4windows-v2.exe --server.urls=http://0.0.0.0:%PORT%"
+  command: "wic4windows-v2.exe --server.urls=http://0.0.0.0:%PORT%"
   stack: windows2012R2
   health-check-type: none
